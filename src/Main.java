@@ -1,35 +1,41 @@
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
+    public static final int LETTERS_OF_THE_ALPHABET = 26;
+
     /**
-     * Given a string, capitalize the letters that occupy even indexes and odd indexes separately, and return as shown below.
-     * Index 0 will be considered even.
-     * For example, capitalize("abcdef") = ['AbCdEf', 'aBcDeF']. See test cases for more examples.
-     * The input will be a lowercase string with no spaces
-     * Good luck!
+     * A pangram is a sentence that contains every single letter of the alphabet at least once. For example,
+     * the sentence "The quick brown fox jumps over the lazy dog" is a pangram,
+     * because it uses the letters A-Z at least once (case is irrelevant).
+     * Given a string, detect whether or not it is a pangram. Return True if it is, False if not.
+     * Ignore numbers and punctuation.
      */
-    public static String[] capitalize(String s){
-        StringBuilder even = new StringBuilder();
-        StringBuilder noEven = new StringBuilder();
-        String[] split = s.split("");
-        for (int i = 0; i < split.length; i++) {
-            if (i % 2 == 0) {
-                even.append(split[i].toUpperCase());
-            } else {
-                even.append(split[i]);
-            }
-            if (i % 2 != 0) {
-                noEven.append(split[i].toUpperCase());
-            } else {
-                noEven.append(split[i]);
+    public static boolean check(String sentence) {
+        Set<Character> set = new HashSet<>();
+        String result = getString(sentence);
+        char[] chars = result.toLowerCase().toCharArray();
+        for (char aChar : chars) {
+            if (!Character.isDigit(aChar)) {
+                set.add(aChar);
             }
         }
-
-        return new String[]{even.toString(), noEven.toString()};
+        return set.size() == LETTERS_OF_THE_ALPHABET;
     }
+
+    private static String getString(String sentence) {
+        return sentence
+                .replace("!", "")
+                .replace(".", "")
+                .replace(",", "")
+                .replace("-", "")
+                .replace("_", "")
+                .replace(" ", "");
+    }
+
     public static void main(String[] args) {
-        String str = "abcdef";
-        System.out.println(Arrays.toString(capitalize(str)));
+        String str = "ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ";
+        System.out.println(check(str));
     }
 }
