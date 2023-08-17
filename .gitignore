@@ -1,2 +1,5 @@
 .idea
 .DS_Store
+Codewars.iml
+.idea/.gitignore
+out
