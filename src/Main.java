@@ -1,33 +1,21 @@
-import java.util.Arrays;
-
 /**
- * Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
- * Example:
- * ["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...]
- * None of the arrays will be empty, so you don't have to worry about that!
+ * Write a function that removes the spaces from the string, then return the resultant string.
+ * Examples:
+ * Input -> Output
+ * "8 j 8   mBliB8g  imjB8B8  jl  B" -> "8j8mBliB8gimjB8B8jlB"
+ * "8 8 Bi fk8h B 8 BB8B B B  B888 c hl8 BhB fd" -> "88Bifk8hB8BB8BBBB888chl8BhBfd"
+ * "8aaaaa dddd r     " -> "8aaaaaddddr"
  */
 
 public class Main {
 
-    public static Object[] removeEveryOther(Object[] arr) {
-        if (arr.length < 2) {
-            return arr;
-        }
-        int length = arr.length % 2 == 0 ? arr.length / 2 : arr.length / 2 + 1;
-        Object[] result = new Object[length];
-        int counter = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (i % 2 == 0) {
-                result[counter] = arr[i];
-                counter++;
-            }
-        }
-        return result;
+    public static String noSpace(final String x) {
+        return x.replace(" ", "");
     }
 
 
     public static void main(String[] args) {
-        Object[] objects = new Object[]{"Hello", "Goodbye", "Hello Again" };
-        System.out.println(Arrays.toString(removeEveryOther(objects)));
+        String str = "8 j 8   mBliB8g  imjB8B8  jl  B";
+        System.out.println(noSpace(str));
     }
 }
