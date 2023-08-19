@@ -1,26 +1,33 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 /**
- * Write a simple regex to validate a username. Allowed characters a
- * lowercase lette
- * numbe
- * undersc
- * Length should be between 4 and 16 characters (both included).
+ * Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
+ * Example:
+ * ["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...]
+ * None of the arrays will be empty, so you don't have to worry about that!
  */
 
 public class Main {
 
-    public static boolean validateUsr(String s) {
-        String regex = "[a-z0-9_]{4,16}+";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(s);
-        return matcher.matches();
+    public static Object[] removeEveryOther(Object[] arr) {
+        if (arr.length < 2) {
+            return arr;
+        }
+        int length = arr.length % 2 == 0 ? arr.length / 2 : arr.length / 2 + 1;
+        Object[] result = new Object[length];
+        int counter = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (i % 2 == 0) {
+                result[counter] = arr[i];
+                counter++;
+            }
+        }
+        return result;
     }
 
 
     public static void main(String[] args) {
-        String str = "a";
-        System.out.println(validateUsr(str));
+        Object[] objects = new Object[]{"Hello", "Goodbye", "Hello Again" };
+        System.out.println(Arrays.toString(removeEveryOther(objects)));
     }
 }
