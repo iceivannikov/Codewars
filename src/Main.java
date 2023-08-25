@@ -1,24 +1,22 @@
-
 /**
- * Given a string made up of letters a, b, and/or c, switch the position of
- * letters a and b (change a to b and vice versa). Leave any incidence of c untouched.
- * Example:
- * 'acb' --> 'bca'
- * 'aabacbaa' --> 'bbabcabb'
+ * Find the sum of the odd numbers within an array, after cubing the initial integers.
+ * The function should return undefined/None/nil/NULL if any of the values aren't numbers.
  */
 
 public class Main {
-    public static String switcheroo(String x) {
-
-        return x.replace("a", "x")
-                .replace("b", "y")
-                .replace("y", "a")
-                .replace("x", "b");
+    public static int cubeOdd(int[] arr) {
+        int result = 0;
+        for (int i : arr) {
+            if (i % 2 != 0) {
+                result += Math.pow(i, 3);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-        String str = "aaabcccbaaa";
-        System.out.println(switcheroo(str));
+        int[] arr = {1, 2, 3, 4};
+        System.out.println(cubeOdd(arr));
     }
 
 }
