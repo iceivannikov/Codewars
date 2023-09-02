@@ -1,42 +1,36 @@
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.function.IntPredicate;
 
 /**
- * Jaden Smith, the son of Will Smith, is the star of films such as The Karate Kid (2010) and After Earth (2013).
- * Jaden is also known for some of his philosophy that he delivers via Twitter.
- * When writing on Twitter, he is known for almost always capitalizing every word.
- * For simplicity, you'll have to capitalize each word, check out how contractions are expected to be in the example below.
- * Your task is to convert strings to how they would be written by Jaden Smith.
- * The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
- * Example:
- * Not Jaden-Cased: "How can mirrors be real if our eyes aren't real"
- * Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real"
- * Note that the Java version expects a return value of null for an empty string or null.
+ * Create a method all which takes two params:
+ * a sequence
+ * a function (function pointer in C)
+ * and returns true if the function in the params returns true for every element in the sequence.
+ * Otherwise, it should return false. If the sequence is empty, it should return true, since technically
+ * nothing failed the test.
+ * Example
+ * all((1, 2, 3, 4, 5), greater_than_9) -> false
+ * all((1, 2, 3, 4, 5), less_than_9)    -> True
  */
 
 public class Main {
-    public static String toJadenCase(String phrase) {
-        if (Objects.isNull(phrase) || phrase.length() == 0) {
-            return null;
+    public static boolean all(int[] list, IntPredicate predicate){
+        if (list.length == 0) {
+            return true;
         }
-        StringBuilder builder = new StringBuilder();
-        String[] strings = phrase.split(" ");
-        for (int i = 0; i < strings.length; i++) {
-            String string = strings[i];
-            String substring1 = string.substring(0, 1).toUpperCase();
-            String substring = string.substring(1);
-            String join = String.join("", substring1, substring);
-            builder.append(join);
-            if (i != strings.length - 1) {
-                builder.append(" ");
+        int count = 0;
+        for (int i : list) {
+            if (predicate.test(i)) {
+                count++;
             }
         }
-        return builder.toString();
+        return count == list.length;
     }
 
+
     public static void main(String[] args) {
-        String str = "How can mirrors be real if our eyes aren't real";
-        System.out.println(toJadenCase(str));
+        IntPredicate evenNumber = n -> n % 2 == 0;
+        int[] arr = {2, 4, 6, 10};
+        System.out.println(all(arr, evenNumber));
     }
 
 }
